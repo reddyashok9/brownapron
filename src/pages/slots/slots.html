@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>
+      Select Slot
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="logout()">
+        <ion-icon md="md-log-out"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+ 
+<ion-content class="slots" padding>
+   <ion-list>
+    <button ion-item *ngFor="let slot of slots" (click)="itemSelected($event, slot)">
+      {{ slot }}
+    </button>
+  </ion-list>
+
+</ion-content>

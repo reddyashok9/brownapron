@@ -1,0 +1,69 @@
+
+<ion-header>
+  <ion-navbar no-border-bottom color="primary"> 
+    <ion-buttons left>
+      <button ion-button (click)="changeSlot()">
+        <ion-icon name="md-arrow-back" ></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      Orders of {{slot}} 
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="logout()">
+        <ion-icon md="md-log-out"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+  <ion-toolbar no-border-top color="primary">
+    <ion-segment [(ngModel)]="order">
+      <ion-segment-button value="pending">
+        Pending
+      </ion-segment-button>
+      <ion-segment-button value="delivered">
+        Delivered
+      </ion-segment-button>
+
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div [ngSwitch]="order">
+<ion-list *ngSwitchCase="'pending'">
+  <h4 class="grey" *ngIf="allOrders.data.length == 0">No orders Found.</h4>
+  <ion-item-sliding *ngFor="let order of allOrders.data | filter:{order_status:'OutForDelivery'}">
+    <ion-item (click)="itemSelected($event, order)">
+      <h2>Order No. {{order.order_no}}</h2>
+      <h3>Customer Name. {{order.customer_name}}</h3>
+      <h3>Mobile No. {{order.mobile_no}}</h3>
+      <p>Address. {{order.customer_address.street}}, {{order.customer_address.locality}}, {{order.customer_address.subLocality}}</p>
+      <p>No. Items. {{order.item_details.length}}</p>
+      <h4>Order Amount. {{order.total_price}}</h4>
+    </ion-item>
+    <ion-item-options side="right">
+      <button ion-button color="primary" (click)="callIT(order.mobile_no)" >
+        <ion-icon  md="md-call"></ion-icon>
+        Call
+      </button>
+    </ion-item-options>
+  </ion-item-sliding>
+</ion-list>
+
+    <ion-list *ngSwitchCase="'delivered'">
+    <h4 class="grey" *ngIf="allCompletedOrders.data.length == 0">No orders Found.</h4>
+    <ion-item *ngFor="let order of allCompletedOrders.data | filter:{order_status:'complete'}">
+      <h2>Order No. {{order.order_no}}</h2>
+      <h3>Customer Name. {{order.customer_name}}</h3>
+      <h3>Mobile No. {{order.mobile_no}}</h3>
+      <p>Address. {{order.customer_address.street}}, {{order.customer_address.locality}}, {{order.customer_address.subLocality}}</p>
+      <p>No. Items. {{order.item_details.length}}</p>
+      <h4>Order Amount. {{order.total_price}}</h4>
+    </ion-item>
+
+    </ion-list>
+  </div>
+
+
+</ion-content>
