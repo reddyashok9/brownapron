@@ -7,6 +7,6 @@ Prerequisites
 
 Step 1: Run "NPM Install"
 
-Step 2: Run "ng serve"
+Step 2: Run "ionic serve"
 
 Step 3: To Build "cordova build andriod"
