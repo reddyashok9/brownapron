@@ -41,6 +41,8 @@
       <p>Address. {{order.customer_address.street}}, {{order.customer_address.locality}}, {{order.customer_address.subLocality}}</p>
       <p>No. Items. {{order.item_details.length}}</p>
       <h4>Order Amount. {{order.total_price}}</h4>
+      <ion-badge item-right *ngIf="order.payment_method == 'Online Payment'">Online Payment</ion-badge>
+
     </ion-item>
     <ion-item-options side="right">
       <button ion-button color="primary" (click)="callIT(order.mobile_no)" >
@@ -60,6 +62,7 @@
       <p>Address. {{order.customer_address.street}}, {{order.customer_address.locality}}, {{order.customer_address.subLocality}}</p>
       <p>No. Items. {{order.item_details.length}}</p>
       <h4>Order Amount. {{order.total_price}}</h4>
+      <ion-badge item-right *ngIf="order.payment_method == 'Online Payment'">Online Payment</ion-badge>
     </ion-item>
 
     </ion-list>

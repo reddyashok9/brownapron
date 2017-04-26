@@ -35,14 +35,30 @@ export class AuthService {
   returnOrderURL: any = this.mainUrl + "ba/api/returnPartialOrder";
 
   public login(credentials) {
+
     if (credentials.username === null || credentials.password === null) {
       return Observable.throw("Please insert credentials");
     } else {
       return Observable.create(observer => {
 
-        this.http.get(this.URL + '&user_id=' + credentials.username + '&pin=' + credentials.password + '&time_stamp=2017')
-          .map(res => res.json()).subscribe(
-          data => {
+        let requestoptions = new RequestOptions();
+        var headers = new Headers();
+    headers.append("Content-Type", 'text/html');
+    //headers.append("api-key", this.apiKey);
+    headers.append("Accept", 'application/json');
+    headers.append("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+    headers.append('Access-Control-Allow-Origin', '*');
+    headers.append("Access-Control-Allow-Credentials", "true");
+       // requestoptions.headers = headers;
+        //requestoptions.withCredentials = true;
+       // requestoptions.method = "GET";
+
+        console.log(requestoptions);
+
+       // this.http.request(new Request(requestoptions))
+       this.http.get(this.URL + '&user_id=' + credentials.username + '&pin=' + credentials.password + '&time_stamp=2017', requestoptions)
+       .map(res => res.json()).subscribe(
+         data => {
             if (data.status === 100) {
               if (data.data.user_type == "DeliveryBoy") {
                 this.currentUser = data;
@@ -99,7 +115,12 @@ export class AuthService {
           err => {
             observer.next(false);
             observer.complete();
-          });
+          },
+          () => {
+            observer.next(false);
+            observer.complete();
+          }
+          )
       });
     }
   }
@@ -121,6 +142,10 @@ export class AuthService {
             }
           },
           err => {
+            observer.next(false);
+            observer.complete();
+          },
+          () => {
             observer.next(false);
             observer.complete();
           });
@@ -155,7 +180,11 @@ public returnPartialOrder(returnItems) {
         err => {
           observer.next(false);
           observer.complete();
-        });
+        },
+          () => {
+            observer.next(false);
+            observer.complete();
+          });
 
 
     });
@@ -198,7 +227,11 @@ public returnPartialOrder(returnItems) {
         err => {
           observer.next(false);
           observer.complete();
-        });
+        },
+          () => {
+            observer.next(false);
+            observer.complete();
+          });
 
 
     });
@@ -243,7 +276,11 @@ public returnPartialOrder(returnItems) {
         err => {
           observer.next(false);
           observer.complete();
-        });
+        },
+          () => {
+            observer.next(false);
+            observer.complete();
+          });
 
 
     });
@@ -288,7 +325,11 @@ public returnPartialOrder(returnItems) {
         err => {
           observer.next(false);
           observer.complete();
-        });
+        },
+          () => {
+            observer.next(false);
+            observer.complete();
+          });
 
 
     });
@@ -324,7 +365,11 @@ public returnPartialOrder(returnItems) {
         err => {
           observer.next(false);
           observer.complete();
-        });
+        },
+          () => {
+            observer.next(false);
+            observer.complete();
+          });
 
 
     });
@@ -360,7 +405,11 @@ public returnPartialOrder(returnItems) {
         err => {
           observer.next(false);
           observer.complete();
-        });
+        },
+          () => {
+            observer.next(false);
+            observer.complete();
+          });
 
 
     });

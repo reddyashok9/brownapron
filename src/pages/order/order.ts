@@ -25,7 +25,8 @@ export class OrderPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AuthService, public platform: Platform,
     public actionsheetCtrl: ActionSheetController, public alertCtrl: AlertController, private loadingCtrl: LoadingController) {
     this.order = navParams.get('order');
-    console.log(this.order);
+    console.log(localStorage.getItem("selectedslot"));
+
   }
 
   cancelOrder() {

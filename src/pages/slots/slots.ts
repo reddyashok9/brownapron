@@ -24,6 +24,7 @@ export class SlotsPage {
     let info = this.auth.getUserInfo();
     this.user = info;
     this.slots = this.user.data.slots;
+     localStorage.removeItem('selectedslot');
     console.log(this.user);
   }
 

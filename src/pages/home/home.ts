@@ -17,6 +17,7 @@ declare var window;
 export class HomePage {
 
   slot: any;
+  selectedSlot:any;
   allOrders: any = {"status":100,"data":[]};
   allCompletedOrders: any = {"status":100,"data":[]};
   order: string = "pending";
@@ -25,14 +26,24 @@ export class HomePage {
   goOrder: any;
 
   constructor(private nav: NavController, public navParams: NavParams, private auth: AuthService, platform: Platform, private alertCtrl: AlertController, private loadingCtrl: LoadingController) {
-    this.slot = navParams.get('slot');
+    this.selectedSlot = navParams.get('slot');
+
+    if(this.selectedSlot === undefined ){
+        this.slot = localStorage.getItem("selectedslot");
+    } else {
+      localStorage.setItem('selectedslot', this.selectedSlot);
+      this.slot = this.selectedSlot;
+    }
+
+    this.allOrders = {"status":100,"data":[]};
+  this.allCompletedOrders = {"status":100,"data":[]};
+    
     this.isAndroid = platform.is('android');
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad SlotsPage');
     this.loadOrders();
-   
-
+    this.loadAllOrders();
   }
  public loadOrders(){
     this.showLoading();
@@ -42,17 +53,19 @@ export class HomePage {
         setTimeout(() => {
           this.allOrders = this.auth.getAllOrders();
           console.log(this.allOrders); 
-          this.loadAllOrders();
+         
           this.loading.dismiss();
         });
       } else {
+        //this.loading.dismiss();
         this.showError("No Orders Found");
-         this.loading.dismiss();
+         
       }
     },
     error => {
+      //this.loading.dismiss();
       this.showError(error);
-       this.loading.dismiss();
+       
     });
  }
 
@@ -71,8 +84,8 @@ export class HomePage {
       }
     },
     error => {
-      this.showError(error);
-       this.loading.dismiss();
+     // this.showError(error);
+      // this.loading.dismiss();
     }); 
   }
   
