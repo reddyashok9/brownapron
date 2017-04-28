@@ -147,12 +147,12 @@ export class OrderPage {
                       });
                     } else {
                       this.showError("Some Problem");
-                       this.loading.dismiss();
+                      // this.loading.dismiss();
                     }
                   },
                     error => {
                       this.showError(error);
-                       this.loading.dismiss();
+                       //this.loading.dismiss();
                     });
                  
                 
@@ -240,7 +240,7 @@ export class OrderPage {
                             });
 
 
-                          this.loading.dismiss();
+                          //this.loading.dismiss();
                         });
                       } else {
                         this.showError("Some Problem");
@@ -309,7 +309,7 @@ export class OrderPage {
                             });
 
 
-                          this.loading.dismiss();
+                         // this.loading.dismiss();
                         });
                       } else {
                         this.showError("Some Problem");

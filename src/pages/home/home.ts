@@ -39,6 +39,10 @@ export class HomePage {
   this.allCompletedOrders = {"status":100,"data":[]};
     
     this.isAndroid = platform.is('android');
+
+    platform.ready().then(()=>{
+       platform.registerBackButtonAction(()=>this.changeSlot());
+    });
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad SlotsPage');
