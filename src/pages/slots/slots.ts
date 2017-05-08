@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, Platform } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service';
 import { LoginPage } from '../login/login';
 import { HomePage } from '../home/home';
@@ -20,12 +20,15 @@ export class SlotsPage {
   slots:any;
   slot: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AuthService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform, private auth: AuthService) {
     let info = this.auth.getUserInfo();
     this.user = info;
     this.slots = this.user.data.slots;
      localStorage.removeItem('selectedslot');
     console.log(this.user);
+    platform.ready().then(()=>{
+       platform.registerBackButtonAction(()=>this.logout());
+    });
   }
 
    public logout() {

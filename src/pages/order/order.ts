@@ -26,6 +26,9 @@ export class OrderPage {
     public actionsheetCtrl: ActionSheetController, public alertCtrl: AlertController, private loadingCtrl: LoadingController) {
     this.order = navParams.get('order');
     console.log(localStorage.getItem("selectedslot"));
+    platform.ready().then(()=>{
+       platform.registerBackButtonAction(()=>this.goBack());
+    });
 
   }
 
