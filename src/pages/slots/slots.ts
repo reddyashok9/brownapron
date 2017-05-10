@@ -38,7 +38,7 @@ export class SlotsPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SlotsPage');
+    console.log('ionViewDidLoad SlotsPage ');
 
   }
 
